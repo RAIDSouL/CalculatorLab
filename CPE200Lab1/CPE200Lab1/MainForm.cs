@@ -29,6 +29,7 @@ namespace CPE200Lab1
             hasDot = false;
             isAfterOperater = false;
             isAfterEqual = false;
+            firstOperand = null;
         }
 
         public MainForm()
@@ -76,19 +77,38 @@ namespace CPE200Lab1
             {
                 return;
             }
-            operate = ((Button)sender).Text;
-            switch (operate)
+            if (firstOperand != null)
             {
-                case "+":
-                case "-":
-                case "X":
-                case "÷":
-                    firstOperand = lblDisplay.Text;
-                    isAfterOperater = true;
-                    break;
-                case "%":
-                    // your code here
-                    break;
+                string secondOperand = lblDisplay.Text;
+                string result = engine.calculate(operate, firstOperand, secondOperand);
+                if (result is "E" || result.Length > 8)
+                {
+                    lblDisplay.Text = "Error";
+                }
+                else
+                {
+                    lblDisplay.Text = result;
+                }
+                firstOperand = lblDisplay.Text;
+                operate = ((Button)sender).Text;
+                isAfterOperater = true;
+            }
+            else
+            {
+                operate = ((Button)sender).Text;
+                switch (operate)
+                {
+                    case "+":
+                    case "-":
+                    case "X":
+                    case "÷":
+                    case "%":
+                    case "1/x":
+                    case "sqrt":
+                        firstOperand = lblDisplay.Text;
+                        isAfterOperater = true;
+                        break;
+                }
             }
             isAllowBack = false;
         }
