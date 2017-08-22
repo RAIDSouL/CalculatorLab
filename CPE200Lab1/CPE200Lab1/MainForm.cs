@@ -61,8 +61,7 @@ namespace CPE200Lab1
                     }
                     break;
                 case "%":
-                    //your code here
-                    break;
+                    return (Convert.ToDouble(firstOperand) * 0.01 ).ToString();
             }
             return "E";
         }
@@ -119,11 +118,9 @@ namespace CPE200Lab1
                 case "-":
                 case "X":
                 case "÷":
+                case "%":
                     firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
-                    break;
-                case "%":
-                    // your code here
                     break;
             }
             isAllowBack = false;
