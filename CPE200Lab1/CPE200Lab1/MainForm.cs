@@ -17,6 +17,7 @@ namespace CPE200Lab1
         private bool isAfterOperater;
         private bool isAfterEqual;
         private string firstOperand;
+        private string secondOperand;
         private string operate;
 
         //Variable for CalculatorEngine
@@ -30,6 +31,7 @@ namespace CPE200Lab1
             isAfterOperater = false;
             isAfterEqual = false;
             firstOperand = null;
+            secondOperand = null;
         }
 
         public MainForm()
@@ -79,7 +81,7 @@ namespace CPE200Lab1
             }
             if (firstOperand != null)
             {
-                string secondOperand = lblDisplay.Text;
+                secondOperand = lblDisplay.Text;
                 string result = engine.calculate(operate, firstOperand, secondOperand);
                 if (result is "E" || result.Length > 8)
                 {
@@ -91,7 +93,7 @@ namespace CPE200Lab1
                 }
                 firstOperand = lblDisplay.Text;
                 operate = ((Button)sender).Text;
-                isAfterOperater = true;
+                isAfterOperater = true; 
             }
             else
             {
@@ -119,17 +121,22 @@ namespace CPE200Lab1
             {
                 return;
             }
-            string secondOperand = lblDisplay.Text;
-            string result = engine.calculate(operate, firstOperand, secondOperand);
-            if (result is "E" || result.Length > 8)
+            if(!isAfterEqual)
             {
-                lblDisplay.Text = "Error";
+                isAfterEqual = true;
+                secondOperand = lblDisplay.Text;
+                string result = engine.calculate(operate, firstOperand, secondOperand);
+                lblDisplay.Text = result;
+                firstOperand = lblDisplay.Text;
+                if (result is "E" || result.Length > 8)
+                {
+                    lblDisplay.Text = "Error";
+                }
             }
             else
             {
-                lblDisplay.Text = result;
+                return;
             }
-            isAfterEqual = true;
         }
 
         private void btnDot_Click(object sender, EventArgs e)
