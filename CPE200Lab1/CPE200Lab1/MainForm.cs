@@ -19,6 +19,7 @@ namespace CPE200Lab1
         private string firstOperand;
         private string secondOperand;
         private string operate;
+        double newNum,memNum = 0;
 
         //Variable for CalculatorEngine
         CalculatorEngine engine;
@@ -128,6 +129,7 @@ namespace CPE200Lab1
                 string result = engine.calculate(operate, firstOperand, secondOperand);
                 lblDisplay.Text = result;
                 firstOperand = lblDisplay.Text;
+                isAfterOperater = true;
                 if (result is "E" || result.Length > 8)
                 {
                     lblDisplay.Text = "Error";
@@ -216,6 +218,21 @@ namespace CPE200Lab1
                 {
                     lblDisplay.Text = "0";
                 }
+            }
+        }
+
+        private void btnMem_Click(object sender, EventArgs e)
+        {
+            string operateMem = ((Button)sender).Text;
+            newNum = Convert.ToDouble(lblDisplay.Text);
+            isAfterOperater = true;
+            switch (operateMem)
+            {
+                case "M+": memNum += newNum; break;
+                case "M-": memNum -= newNum; break;
+                case "MR": lblDisplay.Text = memNum.ToString(); break;
+                case "MC": resetAll(); memNum = 0; break;
+                case "MS": memNum = Convert.ToDouble(lblDisplay.Text); return;
             }
         }
     }
