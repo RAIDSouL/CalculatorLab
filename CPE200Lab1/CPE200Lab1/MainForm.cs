@@ -21,10 +21,8 @@ namespace CPE200Lab1
         private string operate;
         private double memory;
         private CalculatorEngine engine;
-        double newNum,memNum = 0;
 
         //Variable for CalculatorEngine
-        CalculatorEngine engine;
 
         private void resetAll()
         {
@@ -128,17 +126,20 @@ namespace CPE200Lab1
             else
             {
                 operate = ((Button)sender).Text;
+                string temp = operate;
                 switch (operate)
                 {
                     case "+":
                     case "-":
                     case "X":
                     case "÷":
-                    case "%":
-                    case "1/x":
-                    case "sqrt":
                         firstOperand = lblDisplay.Text;
                         isAfterOperater = true;
+                        break;
+                    case "%":
+                        lblDisplay.Text = ((Convert.ToDouble(firstOperand) * Convert.ToDouble(lblDisplay.Text)) / 100).ToString();
+                        isAfterOperater = true;
+                        operate = temp;
                         break;
                 }
             }
