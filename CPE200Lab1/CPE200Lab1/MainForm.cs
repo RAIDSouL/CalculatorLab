@@ -107,8 +107,11 @@ namespace CPE200Lab1
             {
                 return;
             }
+            
             if (firstOperand != null)
             {
+                string temp = operate ;
+                operate = ((Button)sender).Text;
                 secondOperand = lblDisplay.Text;
                 string result = engine.calculate(operate, firstOperand, secondOperand);
                 if (result is "E" || result.Length > 8)
@@ -119,8 +122,15 @@ namespace CPE200Lab1
                 {
                     lblDisplay.Text = result;
                 }
-                firstOperand = lblDisplay.Text;
-                operate = ((Button)sender).Text;
+
+                if (((Button)sender).Text=="%")
+                {
+                    operate = temp;
+                }
+                else
+                {
+                    firstOperand = result;
+                }
                 isAfterOperater = true; 
             }
             else
@@ -137,9 +147,6 @@ namespace CPE200Lab1
                         isAfterOperater = true;
                         break;
                     case "%":
-                        lblDisplay.Text = ((Convert.ToDouble(firstOperand) * Convert.ToDouble(lblDisplay.Text)) / 100).ToString();
-                        isAfterOperater = true;
-                        operate = temp;
                         break;
                 }
             }
@@ -152,23 +159,17 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if(!isAfterEqual)
+            secondOperand = lblDisplay.Text;
+            string result = engine.calculate(operate, firstOperand, secondOperand);
+            if (result is "E" || result.Length > 8)
             {
-                isAfterEqual = true;
-                secondOperand = lblDisplay.Text;
-                string result = engine.calculate(operate, firstOperand, secondOperand);
-                lblDisplay.Text = result;
-                firstOperand = lblDisplay.Text;
-                isAfterOperater = true;
-                if (result is "E" || result.Length > 8)
-                {
-                    lblDisplay.Text = "Error";
-                }
+                lblDisplay.Text = "Error";
             }
             else
             {
-                return;
+                lblDisplay.Text = result;
             }
+            isAfterEqual = true;
         }
 
         private void btnDot_Click(object sender, EventArgs e)
