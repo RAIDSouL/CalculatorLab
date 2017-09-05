@@ -8,13 +8,13 @@ namespace CPE200Lab1
 {
     class CalculatorEngine
     {
-        private bool isNumber(string str)
+        public bool isNumber(string str)
         {
             double retNum;
             return Double.TryParse(str, out retNum);
         }
 
-        private bool isOperator(string str)
+        public bool isOperator(string str)
         {
             switch(str) {
                 case "+":
@@ -26,7 +26,7 @@ namespace CPE200Lab1
             return false;
         }
 
-        public string Process(string str)
+       /* public string Process(string str)
         {
             List<string> parts = str.Split(' ').ToList<string>();
             string result;
@@ -43,7 +43,7 @@ namespace CPE200Lab1
                 }
             }
             return parts[0];
-        }
+        }*/
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
             switch (operate)
