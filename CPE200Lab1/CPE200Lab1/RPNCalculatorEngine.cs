@@ -29,7 +29,6 @@ namespace CPE200Lab1
                     rpnStack.Push(result);
                 }
             }
-
             return result;
         }
     }
