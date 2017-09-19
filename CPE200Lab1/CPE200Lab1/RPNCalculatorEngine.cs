@@ -50,11 +50,6 @@ namespace CPE200Lab1
                 return "E";
             }
             result = rpnStack.Pop().ToString();
-
-
-
-
-
             return result;
         }
     }
